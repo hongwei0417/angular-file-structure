@@ -1,27 +1,77 @@
-# ShelfManagement
+# 儲位管理系統
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+## Features
 
-## Development server
+- [Angular 13](https://angular.io/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Using [Jest](https://jestjs.io/) for unit testing
 
-## Code scaffolding
+- Using [Tailwind](https://tailwindcss.com/) for main css framework
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Using [Storybook](https://storybook.js.org/) for document maintenance
 
-## Build
+- Apply [Atomic Design](https://medium.com/uxeastmeetswest/%E7%B6%B2%E9%A0%81%E8%A8%AD%E8%A8%88-atomic-design%E7%B0%A1%E4%BB%8B%E5%8F%8A%E5%B7%A5%E4%BD%9C%E5%AF%A6%E4%BE%8B-42e666358d52) component design structure
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## File Structure
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- `core` 載入一次性的檔案，通常具有全域性
 
-## Running end-to-end tests
+  - `guards`
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+  - `interceptors`
 
-## Further help
+  - `services`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- `pages` 存放所有頁面檔案
+
+  - `feature name`
+
+    - `feature.module.ts`
+
+    - `feature-routing.module.ts`
+
+- `shared` 存放共享檔案
+
+  - `components` 依據 Atomic Design 分類
+
+    - `atoms` 原子
+
+    - `molecules` 分子
+
+    - `organisms` 聚合物
+
+    - `templates` 樣板
+
+  - `modules` 第三方模組
+
+  - `directives`
+
+  - `pipes`
+
+  - `shared.module.ts`
+
+- `data` 存放資料定義與資料來源
+
+  - `schemas` 資料定義結構
+
+  - `services` 取得資料的服務(ex: api service)
+
+- `utils` 提供常用函示
+
+---
+
+## Component Base Design
+
+所有元件都希望有一下結構
+
+- `some.component.html`
+
+- `some.component.scss`
+
+- `some.component.ts`
+
+- `some.component.spec.ts` => 測試檔案
+
+- `some.stories.ts` => Storybook 檔案
