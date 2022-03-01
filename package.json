@@ -6,9 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "testw": "ng test --watch-all",
-    "coverage": "ng test --coverage",
+    "test": "jest",
+    "testw": "jest --watch-all",
+    "jest": "jest",
+    "coverage": "jest --coverage",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "npm run docs:json && start-storybook -p 6006",
     "build-storybook": "npm run docs:json && build-storybook"
