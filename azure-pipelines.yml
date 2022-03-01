@@ -1,0 +1,57 @@
+variables:
+- name: one
+  value: initialValue
+
+trigger:
+  - master
+  - develop
+
+pool: default
+
+stages:
+  - stage: Test
+    displayName: Test stage
+
+    jobs:
+      - job: Test
+        displayName: Jest Testing
+
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: "16.x"
+            displayName: "Install Node.js"
+
+          - script: |
+              npm install
+              npm run test
+            displayName: "Jest Testing"
+
+  - stage: Build
+    displayName: Build stage
+
+    jobs:
+      - job: Build
+        displayName: Build Angular
+
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: "16.x"
+            displayName: "Install Node.js"
+
+          - script: |
+              npm install -g @angular/cli
+              npm install
+              npm run build
+            displayName: "npm install and build"
+
+      - job: Publish
+        displayName: 'Publish build'
+        dependsOn: Build
+        
+        steps:
+          - publish: '$(Build.ArtifactStagingDirectory)'
+            displayName: 'Publish build'
+            artifact: drop
+            condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
